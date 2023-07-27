@@ -1,5 +1,6 @@
 'use client';
 
+import { createUser } from '@/actions/user';
 import Input from '@/components/input.component';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -31,7 +32,7 @@ export default function SignUpForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    await createUser(data);
   });
 
   return (
