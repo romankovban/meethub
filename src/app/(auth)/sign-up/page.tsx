@@ -1,8 +1,8 @@
-import SignInForm from '@/components/sign-in-form.component';
+import SignUpForm from '@/components/sign-up-form.component';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function SignInPage() {
+export default function SignUpPage() {
   return (
     <div className="flex items-center justify-center h-full">
       <div className="w-96 mx-auto">
@@ -15,13 +15,13 @@ export default function SignInPage() {
             className="mx-auto"
           />
         </div>
-        <SignInForm />
+        <SignUpForm />
         <div className="mt-4 text-center">
           <Link
             className="text-[#C6C1C7] hover:underline hover:text-white transition-all duration-200"
-            href="/sign-up"
+            href="/sign-in"
           >
-            Don't have an account yet? Register now
+            Already have an account? Sign in
           </Link>
         </div>
       </div>

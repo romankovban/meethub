@@ -5,27 +5,29 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-const signInSchema = z.object({
+const signUpSchema = z.object({
+  fullName: z.string().min(6).max(32),
   email: z.string().email(),
   password: z.string().min(6).max(32),
 });
 
-type SignInFormValues = z.infer<typeof signInSchema>;
+type SignUpFormValues = z.infer<typeof signUpSchema>;
 
-export default function SignInForm() {
+export default function SignUpForm() {
   const {
     formState: { errors, isSubmitting },
     setError,
     handleSubmit,
     register,
     getValues,
-  } = useForm<SignInFormValues>({
+  } = useForm<SignUpFormValues>({
     defaultValues: {
       email: '',
+      fullName: '',
       password: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signUpSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
@@ -34,6 +36,12 @@ export default function SignInForm() {
 
   return (
     <form noValidate onSubmit={onSubmit} autoComplete="off">
+      <Input
+        placeholder="Your full name"
+        {...register('fullName')}
+        error={errors.fullName?.message}
+        isEmpty={getValues('fullName').length > 0 ? true : false}
+      />
       <Input
         placeholder="Your email"
         type="email"
@@ -52,7 +60,7 @@ export default function SignInForm() {
         className="bg-[#F94D6A] w-full border-0 rounded p-3 mt-2 text-white font-bold"
         type="submit"
       >
-        {isSubmitting ? 'Loading...' : 'Sign in'}
+        {isSubmitting ? 'Loading...' : 'Register'}
       </button>
     </form>
   );
