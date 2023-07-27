@@ -22,3 +22,7 @@ export const createUser = async (options: CreateUserOption) => {
 
   return user;
 };
+
+export const getUserByEmail = (email: string) => {
+  return prisma.user.findUnique({ where: { email } });
+};
