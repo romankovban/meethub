@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/button.component';
 import Logo from '@/components/logo.component';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -16,7 +17,7 @@ export default function Navbar() {
           <div className="flex items-center gap-8">
             <div className="flex flex-col">
               <div className="text-xl text-white font-bold">
-                {session.user?.email}
+                {session.user?.name}
               </div>
               <div className="text-end">
                 <Link
@@ -27,12 +28,7 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-            <button
-              className="bg-[#D44059] text-white font-bold rounded px-4 py-3"
-              onClick={() => signOut()}
-            >
-              Sign out
-            </button>
+            <Button onClick={() => signOut()}>Sign out</Button>
           </div>
         )}
       </div>

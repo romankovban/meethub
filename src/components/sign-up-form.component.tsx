@@ -1,6 +1,7 @@
 'use client';
 
 import { createUser } from '@/actions/user';
+import Button from '@/components/button.component';
 import Input from '@/components/input.component';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -57,12 +58,9 @@ export default function SignUpForm() {
         error={errors.password?.message}
         isEmpty={getValues('password').length > 0 ? true : false}
       />
-      <button
-        className="bg-[#F94D6A] w-full border-0 rounded p-3 mt-2 text-white font-bold"
-        type="submit"
-      >
+      <Button type="submit" fullWidth>
         {isSubmitting ? 'Loading...' : 'Register'}
-      </button>
+      </Button>
     </form>
   );
 }

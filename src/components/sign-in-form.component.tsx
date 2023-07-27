@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signIn } from 'next-auth/react';
+import Button from '@/components/button.component';
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -53,12 +54,9 @@ export default function SignInForm() {
         error={errors.password?.message}
         isEmpty={getValues('password').length > 0 ? true : false}
       />
-      <button
-        className="bg-[#F94D6A] w-full border-0 rounded p-3 mt-2 text-white font-bold"
-        type="submit"
-      >
+      <Button type="submit" fullWidth>
         {isSubmitting ? 'Loading...' : 'Sign in'}
-      </button>
+      </Button>
     </form>
   );
 }
