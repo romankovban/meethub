@@ -2,9 +2,8 @@ import SignUpForm from '@/components/sign-up-form.component';
 import { authOptions } from '@/core/next-auth.config';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-
-import Image from 'next/image';
 import Link from 'next/link';
+import Logo from '@/components/logo.component';
 
 export default async function SignUpPage() {
   const user = await getServerSession(authOptions);
@@ -16,13 +15,7 @@ export default async function SignUpPage() {
     <div className="flex items-center justify-center h-full">
       <div className="w-96 mx-auto">
         <div className="mb-12">
-          <Image
-            src="/logo.svg"
-            width={42}
-            height={42}
-            alt="logo MeetHub"
-            className="mx-auto"
-          />
+          <Logo className="mx-auto" />
         </div>
         <SignUpForm />
         <div className="mt-4 text-center">

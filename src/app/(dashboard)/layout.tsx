@@ -1,6 +1,7 @@
 import AuthProvider from '@/providers/auth-provider';
 import './globals.css';
 import type { Metadata } from 'next';
+import Navbar from '@/components/navbar.component';
 
 export const metadata: Metadata = {
   title: 'MeetHub',
@@ -16,6 +17,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en" className="h-full">
         <body className="h-full bg-gradient-to-b from-[#26212F] to-[#3E2844]">
+          <Navbar />
           {children}
         </body>
       </html>
