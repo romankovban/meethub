@@ -1,8 +1,17 @@
 import SignUpForm from '@/components/sign-up-form.component';
+import { authOptions } from '@/core/next-auth.config';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  const user = await getServerSession(authOptions);
+
+  if (user) {
+    redirect('/');
+  }
   return (
     <div className="flex items-center justify-center h-full">
       <div className="w-96 mx-auto">

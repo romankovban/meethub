@@ -1,9 +1,10 @@
+import AuthProvider from '@/providers/auth-provider';
 import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'MeetHub',
-  description: 'MeetHub application',
+  description: 'MeetHub Dashboard',
 };
 
 export default function RootLayout({
@@ -12,8 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <AuthProvider>
+      <html lang="en" className="h-full">
+        <body className="h-full bg-gradient-to-b from-[#26212F] to-[#3E2844]">
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

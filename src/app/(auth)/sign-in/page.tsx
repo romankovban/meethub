@@ -3,10 +3,15 @@ import Link from 'next/link';
 import SignInForm from '@/components/sign-in-form.component';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/core/next-auth.config';
+import { redirect } from 'next/navigation';
 
 export default async function SignInPage() {
   const user = await getServerSession(authOptions);
-  console.log('🚀 ~ file: page.tsx:9 ~ SignInPage ~ user:', user);
+
+  if (user) {
+    redirect('/');
+  }
+
   return (
     <div className="flex items-center justify-center h-full">
       <div className="w-96 mx-auto">
