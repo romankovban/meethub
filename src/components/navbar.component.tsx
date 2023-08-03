@@ -9,9 +9,11 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   return (
-    <div className="bg-[#18161F]">
-      <div className="container mx-auto py-8 flex justify-between">
-        <Logo />
+    <div className="bg-[#18161F] mb-12">
+      <div className="container mx-auto py-6 flex justify-between">
+        <Link href="/">
+          <Logo />
+        </Link>
         {status === 'loading' && <div className="text-white">Loading...</div>}
         {status === 'authenticated' && (
           <div className="flex items-center gap-8">
