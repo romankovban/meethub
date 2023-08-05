@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef } from 'react';
 
 interface InputProps {
   placeholder: string;
@@ -9,19 +9,22 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isEmpty?: boolean;
+  textColor?: 'white' | 'gray';
   type?: React.ComponentProps<'input'>['type'];
   error?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, isEmpty, type = 'text', ...inputProps }, ref) => {
-    const inputClasses = clsx(
-      'w-full border-0 rounded p-3 font-medium text-gray-600 outline-[#282231]',
-      {
-        'bg-white': isEmpty,
-        'bg-[#2A2032]': !isEmpty,
-      }
-    );
+  (
+    { error, isEmpty, textColor = 'gray', type = 'text', ...inputProps },
+    ref
+  ) => {
+    const inputClasses = clsx('w-full border-0 rounded p-4 font-medium', {
+      'bg-[#E8F0FE] outline-[#dfeafc]': isEmpty,
+      'bg-[#2A2032] outline-[#282231]': !isEmpty,
+      'text-gray-600': textColor === 'gray',
+      'text-white': textColor === 'white',
+    });
     return (
       <div className="mb-3">
         <input
@@ -29,9 +32,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           {...inputProps}
-          autoComplete={type === 'password' ? 'off' : 'on'}
+          autoComplete="off"
         />
-        {error && <div className="text-[#F94D6A]">{error}</div>}
+        {error && (
+          <div role="alert" className="text-[#F94D6A]">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

@@ -8,6 +8,12 @@ import Link from 'next/link';
 export default function Navbar() {
   const { data: session, status } = useSession();
 
+  const logout = () => {
+    signOut({
+      callbackUrl: '/sign-in',
+    });
+  };
+
   return (
     <div className="bg-[#18161F] mb-12">
       <div className="container mx-auto py-6 flex justify-between">
@@ -30,7 +36,7 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-            <Button onClick={() => signOut()}>Sign out</Button>
+            <Button onClick={logout}>Sign out</Button>
           </div>
         )}
       </div>

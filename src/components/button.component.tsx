@@ -18,8 +18,8 @@ export default function Button({
 }: ButtonProps) {
   const buttonClasses = clsx('text-white font-bold rounded px-4 py-3', {
     'w-full': fullWidth,
-    'bg-[#D44059]': color === 'primary',
-    'bg-[#4DBAFA]': color === 'secondary',
+    'bg-[#D44059] outline-[#d43a54]': color === 'primary',
+    'bg-[#4DBAFA] outline-[#42b8fd]': color === 'secondary',
   });
 
   return <button className={buttonClasses} type={type} {...buttonProps} />;

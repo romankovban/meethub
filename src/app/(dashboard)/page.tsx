@@ -14,17 +14,19 @@ export default async function DashboardPage() {
 
   return (
     <Container>
-      <div className="flex justify-between items-center">
-        <h1 className="text-4xl text-white font-bold">My Meetups</h1>
-        <ButtonLink href="/events/create">
-          <div className="inline-flex items-center gap-2 text-xl">
-            <HiOutlinePlusCircle
-              className="h-6 w-6 font-bold text-4xl"
-              strokeWidth={2}
-            />
-            Create event
-          </div>
-        </ButtonLink>
+      <div className="px-24">
+        <div className="flex justify-between items-center">
+          <h1 className="text-4xl text-white font-bold">My Meetups</h1>
+          <ButtonLink href="/events/create">
+            <div className="inline-flex items-center gap-2 text-xl">
+              <HiOutlinePlusCircle
+                className="h-6 w-6 font-bold text-4xl"
+                strokeWidth={2}
+              />
+              Create event
+            </div>
+          </ButtonLink>
+        </div>
       </div>
     </Container>
   );
