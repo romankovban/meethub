@@ -1,9 +1,8 @@
 'use client';
 
 import Input from '@/components/input.component';
-import { authOptions } from '@/core/next-auth.config';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Button from '@/components/button.component';
@@ -11,6 +10,7 @@ import Textarea from '@/components/textarea.component';
 import ImageInput from '@/components/image-input.component';
 import { toBase64 } from '@/utils/files';
 import { createEvent } from '@/actions/event';
+import useRendered from '@/hooks/use-rendered.hook';
 
 const createEventSchema = z.object({
   title: z.string().min(3).max(255),
@@ -23,9 +23,12 @@ const createEventSchema = z.object({
 type CreateEventFormValues = z.infer<typeof createEventSchema>;
 
 export default function CreateEventForm() {
+  const isRendered = useRendered();
+  const router = useRouter();
+
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<CreateEventFormValues>({
     resolver: zodResolver(createEventSchema),
@@ -39,12 +42,15 @@ export default function CreateEventForm() {
       banner: fileBase64,
       date: new Date(data.date),
     });
+
+    router.replace('/');
   });
 
   return (
     <form onSubmit={onSubmit}>
       <ImageInput
         {...register('banner')}
+        disabled={!isRendered}
         error={errors.banner?.message as string}
       />
       <Input
@@ -74,7 +80,11 @@ export default function CreateEventForm() {
         textColor="white"
         error={errors.localization?.message}
       />
-      <Button type="submit">Create event</Button>
+      <div className="text-end">
+        <Button type="submit" disabled={!isRendered || isSubmitting}>
+          Create event
+        </Button>
+      </div>
     </form>
   );
 }

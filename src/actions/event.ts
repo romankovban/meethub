@@ -1,8 +1,7 @@
 'use server';
 
-import { getUserByEmail } from '@/actions/user';
+import { getUserFromSession } from '@/actions/auth';
 import { prisma } from '@/core/prisma';
-import { getServerSession } from 'next-auth';
 
 interface CreateEventOptions {
   title: string;
@@ -13,17 +12,12 @@ interface CreateEventOptions {
 }
 
 export const createEvent = async (options: CreateEventOptions) => {
-  const session = await getServerSession();
-
-  if (!session || !session.user) {
-    throw new Error('You must be logged in to create an event');
-  }
-
-  const user = await getUserByEmail(session.user.email!);
+  const user = await getUserFromSession();
 
   if (!user) {
     throw new Error('User not found');
   }
+
   const event = await prisma.event.create({
     data: {
       title: options.title,

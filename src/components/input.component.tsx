@@ -32,7 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           {...inputProps}
-          autoComplete="off"
+          autoComplete={type === 'password' ? 'off' : 'on'}
         />
         {error && (
           <div role="alert" className="text-[#F94D6A]">

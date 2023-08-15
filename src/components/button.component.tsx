@@ -8,6 +8,7 @@ interface ButtonProps {
   type?: React.ComponentProps<'button'>['type'];
   color?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -16,11 +17,14 @@ export default function Button({
   type = 'button',
   ...buttonProps
 }: ButtonProps) {
-  const buttonClasses = clsx('text-white font-bold rounded px-4 py-3', {
-    'w-full': fullWidth,
-    'bg-[#D44059] outline-[#d43a54]': color === 'primary',
-    'bg-[#4DBAFA] outline-[#42b8fd]': color === 'secondary',
-  });
+  const buttonClasses = clsx(
+    'text-white font-bold rounded px-4 py-3 disabled:opacity-70',
+    {
+      'w-full': fullWidth,
+      'bg-[#D44059] outline-[#d43a54]': color === 'primary',
+      'bg-[#4DBAFA] outline-[#42b8fd]': color === 'secondary',
+    }
+  );
 
   return <button className={buttonClasses} type={type} {...buttonProps} />;
 }
