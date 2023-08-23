@@ -3,6 +3,7 @@
 import { createUser } from '@/actions/user';
 import Button from '@/components/button.component';
 import Input from '@/components/input.component';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,6 +17,8 @@ const signUpSchema = z.object({
 type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export default function SignUpForm() {
+  const router = useRouter();
+
   const {
     formState: { errors, isSubmitting },
     setError,
@@ -34,6 +37,8 @@ export default function SignUpForm() {
 
   const onSubmit = handleSubmit(async (data) => {
     await createUser(data);
+
+    router.replace('/sign-in');
   });
 
   return (

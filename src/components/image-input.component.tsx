@@ -41,7 +41,7 @@ const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>(
               loading="lazy"
               fill
               alt="banner"
-              className="object-cover"
+              className="object-cover rounded"
             />
           </div>
         )}
