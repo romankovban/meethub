@@ -32,6 +32,47 @@ export const createEvent = async (options: CreateEventOptions) => {
   return event;
 };
 
+interface UpdateEventOptions extends CreateEventOptions {
+  id: string;
+}
+
+export const updateEvent = async (options: UpdateEventOptions) => {
+  const user = await getUserFromSession();
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const oldEvent = await prisma.event.findUnique({
+    where: {
+      id: options.id,
+    },
+  });
+
+  if (!oldEvent) {
+    throw new Error('Event not found');
+  }
+
+  if (oldEvent.user_id !== user.id) {
+    throw new Error('User not authorized');
+  }
+
+  const event = await prisma.event.update({
+    where: {
+      id: options.id,
+    },
+    data: {
+      title: options.title,
+      description: options.description,
+      date: options.date,
+      banner: options.banner,
+      localization: options.localization,
+    },
+  });
+
+  return event;
+};
+
 export const getAllEvents = () => {
   return prisma.event.findMany();
 };

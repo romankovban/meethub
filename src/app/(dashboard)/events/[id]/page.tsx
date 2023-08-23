@@ -1,5 +1,4 @@
 import { getEventById } from '@/actions/event';
-import ButtonLink from '@/components/button-link.component';
 import Button from '@/components/button.component';
 import Container from '@/components/container.component';
 import { DateTime } from 'luxon';

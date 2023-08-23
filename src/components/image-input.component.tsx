@@ -10,11 +10,14 @@ interface ImageInputProps {
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   disabled?: boolean;
+  defaultImage?: string;
 }
 
 const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>(
-  ({ error, disabled, ...inputProps }, ref) => {
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+  ({ error, disabled, defaultImage, ...inputProps }, ref) => {
+    const [imageUrl, setImageUrl] = useState<string | null>(
+      defaultImage || null
+    );
     const inputRef = useForwardRef<HTMLInputElement>(ref);
 
     const handleButtonClick = () => {
