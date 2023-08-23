@@ -73,6 +73,14 @@ export const updateEvent = async (options: UpdateEventOptions) => {
   return event;
 };
 
+export const deleteEvent = (id: string) => {
+  return prisma.event.delete({
+    where: {
+      id,
+    },
+  });
+};
+
 export const getAllEvents = () => {
   return prisma.event.findMany();
 };

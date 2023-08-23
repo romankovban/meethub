@@ -1,11 +1,12 @@
 import { getEventById } from '@/actions/event';
 import Button from '@/components/button.component';
 import Container from '@/components/container.component';
+import DeleteEvent from '@/components/delete-event.component';
 import { DateTime } from 'luxon';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { HiArchiveBoxXMark, HiPencilSquare } from 'react-icons/hi2';
+import { HiPencilSquare } from 'react-icons/hi2';
 
 interface EventPageParams {
   params: {
@@ -33,12 +34,7 @@ export default async function EventPage({ params }: EventPageParams) {
             </Link>
           </div>
           <div className="w-48">
-            <Link href={`/events/${event.id}/delete`}>
-              <Button fullWidth>
-                <HiArchiveBoxXMark className="inline mr-2" />
-                Delete
-              </Button>
-            </Link>
+            <DeleteEvent />
           </div>
         </div>
       </div>
