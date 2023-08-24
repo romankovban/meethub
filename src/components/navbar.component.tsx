@@ -27,14 +27,6 @@ export default function Navbar() {
               <div className="text-xl text-white font-bold">
                 {session.user?.name}
               </div>
-              <div className="text-end">
-                <Link
-                  className="text-sm text-[#C6C1C7] hover:underline hover:text-white transition-all duration-200"
-                  href="/profile"
-                >
-                  My profile
-                </Link>
-              </div>
             </div>
             <Button onClick={logout}>Sign out</Button>
           </div>
